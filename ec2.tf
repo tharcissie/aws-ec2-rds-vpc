@@ -12,14 +12,14 @@ resource "aws_subnet" "public_subnet" {
   vpc_id                  = aws_vpc.my_vpc.id
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
-  availability_zone       = "us-east-1a"  # Change to your desired availability zone
+  availability_zone       = "us-east-1a" 
 }
 
 # Create a private subnet
 resource "aws_subnet" "private_subnet" {
   vpc_id            = aws_vpc.my_vpc.id
   cidr_block        = "10.0.2.0/24"
-  availability_zone = "us-east-1a"  # Change to your desired availability zone
+  availability_zone = "us-east-1a"  
 }
 
 # Create an Internet Gateway for public subnet access
@@ -88,7 +88,7 @@ resource "aws_db_instance" "my_rds" {
   engine_version          = "8.0"
   instance_class          = "db.t3.micro"
   username                = "admin"
-  password                = "password123"  # Use a secure password
+  password                = "password123" 
   vpc_security_group_ids  = [aws_security_group.rds_sg.id]
   db_subnet_group_name    = aws_db_subnet_group.my_db_subnet_group.name
   skip_final_snapshot     = true
@@ -107,7 +107,7 @@ resource "aws_db_subnet_group" "my_db_subnet_group" {
 
 # EC2 instance
 resource "aws_instance" "my_ec2" {
-  ami                    = "ami-0c94855ba95c71c99"  # Amazon Linux 2 AMI ID, change as needed
+  ami                    = "ami-0c94855ba95c71c99"  # Amazon Linux 2 AMI ID
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public_subnet.id
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
